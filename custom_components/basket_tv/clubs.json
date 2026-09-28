@@ -1,0 +1,427 @@
+{
+  "Betclic Élite": {
+    "asvel": {
+      "code": 1942,
+      "name": "Asvel",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/1942/logo/1772-c8016ad7f60f.svg"
+    },
+    "boulazac": {
+      "code": 332,
+      "name": "Boulazac",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/332/logo/326-80e82fc3831f-w128-v1.webp"
+    },
+    "bourg-en-bresse": {
+      "code": 247,
+      "name": "Bourg-en-Bresse",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/247/logo/243-8de0af38c467.svg"
+    },
+    "chalon": {
+      "code": 268,
+      "name": "Chalon",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/268/logo/264-7af9657fe844.svg"
+    },
+    "cholet": {
+      "code": 114,
+      "name": "Cholet",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/114/logo/114-a3fdde42131c.svg"
+    },
+    "dijon": {
+      "code": 133,
+      "name": "Dijon",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/133/logo/130-8ad2fb5adb2f.svg"
+    },
+    "gravelines-dunkerque": {
+      "code": 301,
+      "name": "Gravelines-Dunkerque",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/301/logo/6881-378b986c000f.svg"
+    },
+    "le-mans": {
+      "code": 112,
+      "name": "Le Mans",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/112/logo/112-27d87fe9d4f1.svg"
+    },
+    "limoges": {
+      "code": 106,
+      "name": "Limoges",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/106/logo/106-59e22d169c89.svg"
+    },
+    "nancy": {
+      "code": 3570,
+      "name": "Nancy",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/3570/logo/2397-a848346b2be2.svg"
+    },
+    "nanterre": {
+      "code": 102,
+      "name": "Nanterre",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/102/logo/102-e29072540b1f.svg"
+    },
+    "paris": {
+      "code": 557,
+      "name": "Paris",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/557/logo/6902-8932f4e6530f.svg"
+    },
+    "pau-orthez": {
+      "code": 269,
+      "name": "Pau-Orthez",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/269/logo/265-14e0aefe2443-w128-v1.webp"
+    },
+    "roanne": {
+      "code": 255,
+      "name": "Roanne",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/255/logo/251-47e7ff541029.svg"
+    },
+    "saint-quentin": {
+      "code": 3573,
+      "name": "Saint Quentin",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/3573/logo/2400-c1f2deafab70.svg"
+    },
+    "strasbourg": {
+      "code": 111,
+      "name": "Strasbourg",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/111/logo/111-4441773c8921.svg"
+    }
+  },
+  "Équipes de France": {
+    "france": {
+      "code": 226,
+      "name": "France",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/226/logo/222-054609ad644d-w128-v1.webp"
+    },
+    "france-feminine": {
+      "code": 1077,
+      "name": "France féminine",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/1077/logo/1056-4b456d27df46.svg"
+    }
+  },
+  "NBA": {
+    "atlanta-hawks": {
+      "code": 284,
+      "name": "Atlanta Hawks",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/284/logo/280-877ad6f9923a.svg"
+    },
+    "boston-celtics": {
+      "code": 101,
+      "name": "Boston Celtics",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/101/logo/101-74299388354d.svg"
+    },
+    "brooklyn-nets": {
+      "code": 174,
+      "name": "Brooklyn Nets",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/174/logo/170-bad63b441a2b.svg"
+    },
+    "charlotte-hornets": {
+      "code": 109,
+      "name": "Charlotte Hornets",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/109/logo/109-d73983aeef7a.svg"
+    },
+    "chicago-bulls": {
+      "code": 1236,
+      "name": "Chicago Bulls",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/1236/logo/1176-47d766b5a00d.svg"
+    },
+    "cleveland-cavaliers": {
+      "code": 369,
+      "name": "Cleveland Cavaliers",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/369/logo/362-8c59d2ac64a3.svg"
+    },
+    "dallas-mavericks": {
+      "code": 132,
+      "name": "Dallas Mavericks",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/132/logo/129-d69d3532f11c.svg"
+    },
+    "denver-nuggets": {
+      "code": 108,
+      "name": "Denver Nuggets",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/108/logo/108-5ba9bba856af.svg"
+    },
+    "detroit-pistons": {
+      "code": 139,
+      "name": "Detroit Pistons",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/139/logo/135-7bb541444d10.svg"
+    },
+    "golden-state-warriors": {
+      "code": 100,
+      "name": "Golden State Warriors",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/100/logo/100-f9a242a8f0f8.svg"
+    },
+    "houston-rockets": {
+      "code": 122,
+      "name": "Houston Rockets",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/122/logo/119-45a3a4de5996.svg"
+    },
+    "indiana-pacers": {
+      "code": 120,
+      "name": "Indiana Pacers",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/120/logo/118-eeea5801221e.svg"
+    },
+    "los-angeles-clippers": {
+      "code": 124,
+      "name": "Los Angeles Clippers",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/124/logo/121-53eeb69ee9f2.svg"
+    },
+    "los-angeles-lakers": {
+      "code": 107,
+      "name": "Los Angeles Lakers",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/107/logo/107-6a02dc13c24b.svg"
+    },
+    "memphis-grizzlies": {
+      "code": 295,
+      "name": "Memphis Grizzlies",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/295/logo/290-7e17d96ba4f2.svg"
+    },
+    "miami-heat": {
+      "code": 110,
+      "name": "Miami Heat",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/110/logo/110-2604e9bc7e49.svg"
+    },
+    "milwaukee-bucks": {
+      "code": 119,
+      "name": "Milwaukee Bucks",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/119/logo/117-a70de1727463.svg"
+    },
+    "minnesota-timberwolves": {
+      "code": 319,
+      "name": "Minnesota Timberwolves",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/319/logo/313-a65a2adf9343.svg"
+    },
+    "new-orleans-pelicans": {
+      "code": 136,
+      "name": "New Orleans Pelicans",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/136/logo/133-1dac23217eb0.svg"
+    },
+    "new-york-knicks": {
+      "code": 127,
+      "name": "New York Knicks",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/127/logo/124-9088204299c8.svg"
+    },
+    "oklahoma-city-thunder": {
+      "code": 125,
+      "name": "Oklahoma City Thunder",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/125/logo/122-7e2a6b357b5f.svg"
+    },
+    "orlando-magic": {
+      "code": 229,
+      "name": "Orlando Magic",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/229/logo/225-8b74af5b7cea.svg"
+    },
+    "philadelphia-76ers": {
+      "code": 123,
+      "name": "Philadelphia 76ers",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/123/logo/120-be8cfdd7277e.svg"
+    },
+    "phoenix-suns": {
+      "code": 325,
+      "name": "Phoenix Suns",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/325/logo/319-152e2ca6126e-w64-v1.webp"
+    },
+    "portland-trail-blazers": {
+      "code": 137,
+      "name": "Portland Trail Blazers",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/137/logo/134-4d3967d7a442.svg"
+    },
+    "sacramento-kings": {
+      "code": 128,
+      "name": "Sacramento Kings",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/128/logo/125-cb071e3d6fee.svg"
+    },
+    "san-antonio-spurs": {
+      "code": 173,
+      "name": "San Antonio Spurs",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/173/logo/169-65ec1b37eb32.svg"
+    },
+    "toronto-raptors": {
+      "code": 140,
+      "name": "Toronto Raptors",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/140/logo/136-19e77681184a.svg"
+    },
+    "utah-jazz": {
+      "code": 134,
+      "name": "Utah Jazz",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/134/logo/131-a4f6b79f74d1.svg"
+    },
+    "washington-wizards": {
+      "code": 135,
+      "name": "Washington Wizards",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/135/logo/132-31df3e2ab91c.svg"
+    }
+  },
+  "Pro B": {
+    "ada-blois": {
+      "code": 3565,
+      "name": "Ada Blois",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/3565/logo/2392-8ce9d20e3dde.svg"
+    },
+    "aix-maurienne": {
+      "code": 1801,
+      "name": "Aix-Maurienne",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/1801/logo/1652-d4c0af1654bc-w128-v1.webp"
+    },
+    "alliance-sport-alsace": {
+      "code": 5641,
+      "name": "Alliance Sport Alsace",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/5641/logo/3092-59827ae8a4cf-w128-v1.webp"
+    },
+    "antibes": {
+      "code": 690,
+      "name": "Antibes",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/690/logo/682-6c0e1707be98-w128-v1.webp"
+    },
+    "caen": {
+      "code": 10358,
+      "name": "Caen",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/10358/logo/4796-9b77d55d2c28.svg"
+    },
+    "chalons-reims": {
+      "code": 323,
+      "name": "Châlons-Reims",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/323/logo/317-b89ec4078ab8-w128-v1.webp"
+    },
+    "denain-voltaire": {
+      "code": 3566,
+      "name": "Denain-Voltaire",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/3566/logo/2393-3ff1035936df-w128-v1.webp"
+    },
+    "evreux-basket": {
+      "code": 3567,
+      "name": "Evreux basket",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/3567/logo/2394-6d5394a54765-w128-v1.webp"
+    },
+    "fos-sur-mer": {
+      "code": 559,
+      "name": "Fos-sur-Mer",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/559/logo/551-494f755d08e3-w128-v1.webp"
+    },
+    "hyeres-toulon": {
+      "code": 10360,
+      "name": "Hyeres-Toulon",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/10360/logo/4798-7a9002ea70b2-w128-v1.webp"
+    },
+    "le-havre": {
+      "code": 11712,
+      "name": "Le Havre",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/11712/logo/7195-0e80e9110e6d.svg"
+    },
+    "levallois-metropolitans": {
+      "code": 126,
+      "name": "Levallois Metropolitans",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/126/logo/123-7fda2b352785.svg"
+    },
+    "nantes": {
+      "code": 1842,
+      "name": "Nantes",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/1842/logo/1680-6455dd5ec4b9-w128-v1.webp"
+    },
+    "orleans": {
+      "code": 1165,
+      "name": "Orléans",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/1165/logo/1129-dded780a8d75-w128-v1.webp"
+    },
+    "poitiers": {
+      "code": 3571,
+      "name": "Poitiers",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/3571/logo/2398-2f005fc8ce6f-w128-v1.webp"
+    },
+    "quimper": {
+      "code": 3572,
+      "name": "Quimper",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/3572/logo/2399-5977b114d448-w128-v1.webp"
+    },
+    "rouen": {
+      "code": 254,
+      "name": "Rouen",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/254/logo/250-1d5005d4a390-w128-v1.webp"
+    },
+    "scabb-saint-etienne-metropole": {
+      "code": 11713,
+      "name": "SCABB Saint-etienne Métropole",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/11713/logo/7194-f03106837312.svg"
+    },
+    "vichy-clermont": {
+      "code": 3576,
+      "name": "Vichy-Clermont",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/3576/logo/2403-08489e70b959-w128-v1.webp"
+    }
+  },
+  "Euroligue": {
+    "anadolu-efes-istanbul": {
+      "code": 1024,
+      "name": "Anadolu Efes Istanbul",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/1024/logo/1006-5cae61fb21b7.svg"
+    },
+    "baskonia": {
+      "code": 368,
+      "name": "Baskonia",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/368/logo/361-d4f074ed4039.svg"
+    },
+    "bayern-munich": {
+      "code": 568,
+      "name": "Bayern Munich",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/568/logo/560-05d048341c1e.svg"
+    },
+    "besiktas": {
+      "code": 103,
+      "name": "Besiktas",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/103/logo/103-54c89817b278.svg"
+    },
+    "etoile-rouge-belgrade": {
+      "code": 322,
+      "name": "Etoile Rouge Belgrade",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/322/logo/316-2404d8418307.svg"
+    },
+    "fc-barcelone": {
+      "code": 104,
+      "name": "FC Barcelone",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/104/logo/104-4403883c9aa2.svg"
+    },
+    "fenerbahce": {
+      "code": 141,
+      "name": "Fenerbahçe",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/141/logo/137-6daaa6224bc2.svg"
+    },
+    "maccabi-tel-aviv": {
+      "code": 372,
+      "name": "Maccabi Tel-Aviv",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/372/logo/365-f2b738fe8d68.svg"
+    },
+    "olimpia-milan": {
+      "code": 373,
+      "name": "Olimpia Milan",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/373/logo/366-72f2e052d8c4.svg"
+    },
+    "olympiakos": {
+      "code": 302,
+      "name": "Olympiakos",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/302/logo/296-391fbb987c59.svg"
+    },
+    "panathinaikos": {
+      "code": 217,
+      "name": "Panathinaïkos",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/217/logo/213-37c89faf082c.svg"
+    },
+    "partizan-belgrade": {
+      "code": 328,
+      "name": "Partizan Belgrade",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/328/logo/322-21a36120207f.svg"
+    },
+    "real-madrid": {
+      "code": 105,
+      "name": "Real Madrid",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/105/logo/7115-5691a2faa32d.svg"
+    },
+    "valence": {
+      "code": 293,
+      "name": "Valence",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/293/logo/288-667cc6f5488c.svg"
+    },
+    "virtus-bologne": {
+      "code": 1694,
+      "name": "Virtus Bologne",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/1694/logo/1586-17297abecf27.svg"
+    },
+    "zalgiris-kaunas": {
+      "code": 281,
+      "name": "Žalgiris Kaunas",
+      "logo": "https://img.tv-programme.com/photos/sport/equipes_v3/281/logo/277-c8eea67bca36.svg"
+    }
+  }
+}
