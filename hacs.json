@@ -1,0 +1,8 @@
+{
+  "name": "Basket TV (Betclic Élite / Pro B / NBA)",
+  "content_in_root": false,
+  "filename": "",
+  "country": ["FR"],
+  "homeassistant": "2023.1.0",
+  "render_readme": true
+}
