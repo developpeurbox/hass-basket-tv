@@ -1,4 +1,9 @@
-"""Config flow Basket TV — sélection multi-clubs (Betclic Élite, Pro B, NBA…)."""
+"""Config flow Basket TV — pré-écran ligue(s), puis sélection des clubs dans ces ligues.
+
+83 clubs au total : une seule liste à cocher serait trop longue. On choisit d'abord
+une ou plusieurs ligues (Betclic Élite, Pro B, Euroligue, NBA, Équipes de France),
+puis seuls les clubs de ces ligues sont proposés à la sélection.
+"""
 from __future__ import annotations
 
 import voluptuous as vol
@@ -21,48 +26,74 @@ async def _load_clubs(hass: HomeAssistant) -> dict:
     return await load_clubs_async(session, force=True)
 
 
-def _build_options(clubs: dict) -> tuple[list[dict], dict[str, dict]]:
-    """Retourne (options pour le sélecteur, dict slug -> config club)."""
+def _league_options(clubs: dict) -> list[dict]:
+    return [{"value": league, "label": league} for league in sorted(clubs.keys())]
+
+
+def _club_options(clubs: dict, leagues: list[str]) -> tuple[list[dict], dict[str, dict]]:
+    """Options de clubs restreintes aux ligues choisies + dict slug -> config club."""
     flat = flatten_clubs(clubs)
+    flat = {s: c for s, c in flat.items() if c["league"] in leagues}
+    multi_league = len(leagues) > 1
     options = [
-        {"value": slug, "label": f"{cfg['league']} — {cfg.get('name') or slug.replace('-', ' ').title()}"}
+        {
+            "value": slug,
+            "label": f"{cfg['league']} — {cfg.get('name') or slug}" if multi_league
+            else (cfg.get("name") or slug),
+        }
         for slug, cfg in flat.items()
     ]
     options.sort(key=lambda o: o["label"])
     return options, flat
 
 
-def _add_missing_current(options: list[dict], flat: dict, current: dict) -> None:
-    """Ne jamais perdre un club coché même s'il a disparu du dataset."""
-    known = {opt["value"] for opt in options}
-    for slug, cfg in current.items():
-        if slug not in known:
-            league = cfg.get("league", "?")
-            options.append(
-                {"value": slug, "label": f"(retiré du dataset) {league} — {slug}"}
-            )
-            flat[slug] = cfg
-    options.sort(key=lambda o: o["label"])
+def _leagues_selector(options: list[dict]):
+    return SelectSelector(
+        SelectSelectorConfig(options=options, multiple=True, mode=SelectSelectorMode.LIST)
+    )
+
+
+def _clubs_selector(options: list[dict]):
+    return SelectSelector(
+        SelectSelectorConfig(options=options, multiple=True, mode=SelectSelectorMode.LIST)
+    )
 
 
 class BasketTvConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
-    """Choisir les clubs à suivre, en une étape."""
+    """Étape 1 : ligues à suivre. Étape 2 : clubs dans ces ligues."""
 
     VERSION = 1
 
     def __init__(self):
         self._clubs: dict = {}
+        self._leagues: list[str] = []
 
     async def async_step_user(self, user_input=None):
         if self._async_current_entries():
             return self.async_abort(reason="already_configured")
 
         errors = {}
-
         if not self._clubs:
             self._clubs = await _load_clubs(self.hass)
 
-        options, flat = _build_options(self._clubs)
+        if user_input is not None:
+            self._leagues = user_input.get("leagues", [])
+            if not self._leagues:
+                errors["leagues"] = "no_league"
+            else:
+                return await self.async_step_clubs()
+
+        return self.async_show_form(
+            step_id="user",
+            data_schema=vol.Schema(
+                {vol.Required("leagues"): _leagues_selector(_league_options(self._clubs))}
+            ),
+            errors=errors,
+        )
+
+    async def async_step_clubs(self, user_input=None):
+        errors = {}
+        options, flat = _club_options(self._clubs, self._leagues)
 
         if user_input is not None:
             chosen = user_input.get("clubs", [])
@@ -74,16 +105,8 @@ class BasketTvConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 return self.async_create_entry(title=title, data={"selected": selected})
 
         return self.async_show_form(
-            step_id="user",
-            data_schema=vol.Schema(
-                {
-                    vol.Required("clubs"): SelectSelector(
-                        SelectSelectorConfig(
-                            options=options, multiple=True, mode=SelectSelectorMode.LIST
-                        )
-                    ),
-                }
-            ),
+            step_id="clubs",
+            data_schema=vol.Schema({vol.Required("clubs"): _clubs_selector(options)}),
             errors=errors,
         )
 
@@ -94,30 +117,74 @@ class BasketTvConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
 
 class BasketTvOptionsFlow(config_entries.OptionsFlow):
-    """Modifier les clubs suivis d'une entrée existante."""
+    """Modifier les clubs suivis, par ligue(s) choisie(s).
+
+    Les clubs des ligues non re-sélectionnées à l'étape 1 sont conservés tels quels :
+    modifier une ligue ne fait jamais perdre les clubs suivis dans les autres.
+    """
 
     def __init__(self, config_entry):
         self._config_entry = config_entry
         self._clubs: dict = {}
+        self._leagues: list[str] = []
+        self._current: dict = {}
+        self._untouched: dict = {}
 
     async def async_step_init(self, user_input=None):
         errors = {}
-        current = dict(self.config_entry.data.get("selected", {}))
-
         if not self._clubs:
             self._clubs = await _load_clubs(self.hass)
+        if not self._current:
+            self._current = dict(self.config_entry.data.get("selected", {}))
 
-        options, flat = _build_options(self._clubs)
-        _add_missing_current(options, flat, current)
+        default_leagues = sorted({cfg.get("league", "?") for cfg in self._current.values()})
 
-        default_chosen = list(current.keys())
+        if user_input is not None:
+            self._leagues = user_input.get("leagues", [])
+            if not self._leagues:
+                errors["leagues"] = "no_league"
+            else:
+                # Clubs déjà suivis dans une ligue qu'on ne modifie pas cette fois : conservés.
+                self._untouched = {
+                    s: c for s, c in self._current.items() if c.get("league") not in self._leagues
+                }
+                return await self.async_step_clubs()
+
+        return self.async_show_form(
+            step_id="init",
+            data_schema=vol.Schema(
+                {
+                    vol.Required("leagues", default=default_leagues): _leagues_selector(
+                        _league_options(self._clubs)
+                    )
+                }
+            ),
+            errors=errors,
+        )
+
+    async def async_step_clubs(self, user_input=None):
+        errors = {}
+        options, flat = _club_options(self._clubs, self._leagues)
+
+        # Clubs déjà suivis, mais dont la fiche a disparu du dataset : gardés quand même.
+        known = {opt["value"] for opt in options}
+        for slug, cfg in self._current.items():
+            if cfg.get("league") in self._leagues and slug not in known:
+                options.append({"value": slug, "label": f"(retiré du dataset) {slug}"})
+                flat[slug] = cfg
+        options.sort(key=lambda o: o["label"])
+
+        default_chosen = [
+            s for s, c in self._current.items() if c.get("league") in self._leagues
+        ]
 
         if user_input is not None:
             chosen = user_input.get("clubs", [])
             if not chosen:
                 errors["clubs"] = "no_club"
             else:
-                selected = {s: flat[s] for s in chosen if s in flat}
+                edited = {s: flat[s] for s in chosen if s in flat}
+                selected = {**self._untouched, **edited}
                 self.hass.config_entries.async_update_entry(
                     self.config_entry,
                     title=", ".join(sorted(cfg.get("name") or s for s, cfg in selected.items())),
@@ -126,15 +193,9 @@ class BasketTvOptionsFlow(config_entries.OptionsFlow):
                 return self.async_create_entry(title="", data={})
 
         return self.async_show_form(
-            step_id="init",
+            step_id="clubs",
             data_schema=vol.Schema(
-                {
-                    vol.Required("clubs", default=default_chosen): SelectSelector(
-                        SelectSelectorConfig(
-                            options=options, multiple=True, mode=SelectSelectorMode.LIST
-                        )
-                    ),
-                }
+                {vol.Required("clubs", default=default_chosen): _clubs_selector(options)}
             ),
             errors=errors,
         )
