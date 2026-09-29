@@ -13,3 +13,9 @@ CLUBS_JSON_URL = (
     "refs/heads/main/custom_components/basket_tv/clubs.json"
 )
 CLUBS_CACHE_TTL = 3600  # secondes — rechargement max 1x/heure
+
+# URL distante du fichier channels.json (logo des chaînes de diffusion).
+CHANNELS_JSON_URL = (
+    "https://raw.githubusercontent.com/developpeurbox/hass-basket-tv/"
+    "refs/heads/main/custom_components/basket_tv/channels.json"
+)
