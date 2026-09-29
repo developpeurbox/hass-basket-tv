@@ -1,16 +1,12 @@
 # Basket TV — Intégration HACS pour Home Assistant
-
-![Installations](https://img.shields.io/badge/dynamic/json?color=41BDF5&logo=home-assistant&label=Installations&suffix=%20installs&cacheSeconds=15600&style=for-the-badge&url=https://analytics.home-assistant.io/custom_integrations.json&query=$.basket_tv.total)
-
 [![PayPal](https://img.shields.io/badge/paypal-me-blue.svg?style=for-the-badge&color=purple&logo=paypal&logoColor=ccc&link=https%3A%2F%2Fpaypal.me%2hlaissus/5)](https://paypal.me/hlaissus/5)
-[![GitHub Release]( https://img.shields.io/github/v/release/developpeurbox/footao-game-card?style=for-the-badge)](https://github.com/developpeurbox/footao-game-card/releases)
-[![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg?style=for-the-badge)](https://github.com/hacs/integration)
-[![Community Forum]( https://img.shields.io/badge/community-forum-brightgreen.svg?style=for-the-badge)](https://community.home-assistant.io)
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=for-the-badge)](https://github.com/developpeurbox/footao-game-card/blob/main/LICENSE)
+[![GitHub Release]( https://img.shields.io/github/v/release/developpeurbox/hass-basket-tv?style=for-the-badge&color=blue)](https://github.com/developpeurbox/hass-basket-tv/releases)
+[![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg?style=for-the-badge&color=blue)](https://github.com/hacs/integration)
+[![Community Forum]( https://img.shields.io/badge/community-forum-brightgreen.svg?style=for-the-badge&color=pink)](https://forum.hacf.fr/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=for-the-badge)](https://github.com/developpeurbox/hass-basket-tv/blob/main/LICENSE)
 
- 
-
-
+[![HACS Action](https://github.com/developpeurbox/hass-basket-tv/actions/workflows/hacs.yml/badge.svg?style=for-the-badge)](https://github.com/developpeurbox/hass-basket-tv/actions/workflows/hacs.yml)
+[![HACS Action](https://github.com/developpeurbox/hass-basket-tv/actions/workflows/hassfest.yml/badge.svg?style=for-the-badge)](https://github.com/developpeurbox/hass-basket-tv/actions/workflows/hassfest.yml)
 
 Intégration personnalisée pour Home Assistant permettant de suivre le **prochain match télévisé** de vos clubs de basket préférés (Betclic Élite, Pro B, Euroligue, NBA, équipes de France), à partir des flux RSS de [**tv-sports.fr**](https://tv-sports.fr/).
 
@@ -19,7 +15,6 @@ Intégration personnalisée pour Home Assistant permettant de suivre le **procha
 ## ✨ Caractéristiques
 
 - 📅 Suivi multi-clubs : un sensor par club, toutes compétitions confondues (championnat national **et** coupes européennes pour les clubs qui y jouent, ex. ASVEL en Euroligue).
-- 🏀 83 clubs référencés par défaut : 16 Betclic Élite, 19 Pro B, 16 Euroligue, 30 NBA, 2 équipes de France.
 - 📺 Infos complètes : adversaire, domicile/extérieur, compétition, date, heure, diffuseur(s) TV et leurs logos, logos des équipes.
 - ⚙️ Configuration via l'interface Home Assistant (sélection multi-clubs, **une seule instance** de l'intégration).
 - 🔗 Lien direct vers la fiche du match sur tv-sports.fr.
@@ -121,3 +116,7 @@ logger:
 ---
 
 *Toutes les données de match et de diffusion proviennent de [tv-sports.fr](https://tv-sports.fr/). Merci de garder un usage personnel et un intervalle de rafraîchissement raisonnable.*
+
+
+### 💬 **Communauté & Support**
+🗣️ **Forum Home Assistant** : [Discuter ici](https://forum.hacf.fr/t/carte-lovelace-integration-rugby-tv-le-programme-tv-arrive-dans-home-assistant/84193)
