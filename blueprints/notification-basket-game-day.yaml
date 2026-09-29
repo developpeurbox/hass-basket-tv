@@ -1,0 +1,79 @@
+blueprint:
+  name: Basket TV Notification jour de match
+  description: >
+    Envoie une notification si au moins un capteur Basket TV indique
+    un match aujourd'hui.
+  domain: automation
+
+  input:
+    match_sensors:
+      name: Capteurs de matchs Basket TV
+      description: Uniquement les capteurs de l'intégration Basket TV (sensor.basket_tv_*)
+      selector:
+        entity:
+          multiple: true
+          filter:
+            - integration: basket_tv
+              domain: sensor
+
+    notification_service:
+      name: Service de notification
+      description: Choisissez le service de notification à utiliser (ex. notify.mobile_app_...)
+      selector:
+        text: 
+
+    notify_time:
+      name: Heure de vérification
+      default: "08:00:00"
+      selector:
+        time:
+
+    title_template:
+      name: Titre de la notification
+      default: "🏀 Jour de match !"
+      selector:
+        text:
+
+trigger:
+  - platform: time
+    at: !input notify_time
+
+variables:
+  input_sensors: !input match_sensors
+  notify_svc: !input notification_service
+  title_rendered: !input title_template
+
+  matches: >
+    {% set ns = namespace(result=[]) %}
+    {% for entity_id in input_sensors %}
+      {% if state_attr(entity_id, 'date') == now().strftime('%d/%m/%Y') %}
+        {% set ns.result = ns.result + [entity_id] %}
+      {% endif %}
+    {% endfor %}
+    {{ ns.result }}
+
+  message_rendered: |
+    {% set ns = namespace(result=[]) %}
+    {% for entity_id in input_sensors %}
+      {% if state_attr(entity_id, 'date') == now().strftime('%d/%m/%Y') %}
+        {% set ns.result = ns.result + [entity_id] %}
+      {% endif %}
+    {% endfor %}
+    {% for s in ns.result %}
+      {% set d1 = state_attr(s, 'diffuseur1') %}
+      {% set d2 = state_attr(s, 'diffuseur2') %}
+      {% set chaines = [d1, d2] | select('!=', '') | select('!=', none) | list | join(' / ') %}
+      🏀 {{ state_attr(s, 'game') }} 🕐 {{ state_attr(s, 'heure') }}{% if chaines %} 📺 {{ chaines }}{% endif %}
+    {% endfor %}
+
+condition:
+  - condition: template
+    value_template: "{{ matches | length > 0 }}"
+
+action:
+  - action: "{{ notify_svc }}"
+    data:
+      title: "{{ title_rendered }}"
+      message: "{{ message_rendered }}"
+
+mode: single
