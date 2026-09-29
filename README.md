@@ -10,6 +10,8 @@
 
 Intégration personnalisée pour Home Assistant permettant de suivre le **prochain match télévisé** de vos clubs de basket préférés (Betclic Élite, Pro B, Euroligue, NBA, équipes de France), à partir des flux RSS de [**tv-sports.fr**](https://tv-sports.fr/).
 
+![Exemple RUgby TV Game Card](/doc/images/example.png "Exemple d'affichage")
+
 > 🎴 La carte Lovelace dédiée n'est **pas incluse** dans ce dépôt — elle vit dans son propre repo : [`ha-basket-tv-game-card`](https://github.com/developpeurbox/ha-basket-tv-game-card), à installer séparément.
 
 ## ✨ Caractéristiques
