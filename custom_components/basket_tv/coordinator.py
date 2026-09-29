@@ -21,6 +21,7 @@ from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, Upda
 from homeassistant.util import dt as dt_util
 
 from .const import (
+    CHANNELS_JSON_URL,
     CLUBS_CACHE_TTL,
     CLUBS_JSON_URL,
     DOMAIN,
@@ -67,6 +68,39 @@ async def load_clubs_async(session: aiohttp.ClientSession, force: bool = False) 
     return data
 
 
+# ─── Cache channels.json ─────────────────────────────────────────────────────
+_channels_cache: dict | None = None
+_channels_cache_ts: float = 0.0
+
+
+async def load_channels_async(session: aiohttp.ClientSession, force: bool = False) -> dict:
+    """Charge channels.json (logo des chaînes) : version GitHub (cache 1 h), sinon fichier embarqué."""
+    global _channels_cache, _channels_cache_ts
+
+    now = time.monotonic()
+    if not force and _channels_cache and (now - _channels_cache_ts) < CLUBS_CACHE_TTL:
+        return _channels_cache
+
+    try:
+        async with session.get(
+            CHANNELS_JSON_URL, timeout=aiohttp.ClientTimeout(total=10)
+        ) as resp:
+            if resp.status == 200:
+                data = await resp.json(content_type=None)
+                _channels_cache, _channels_cache_ts = data, now
+                return data
+            _LOGGER.debug("channels.json GitHub → HTTP %s, fallback local", resp.status)
+    except Exception as err:  # noqa: BLE001
+        _LOGGER.debug("channels.json GitHub inaccessible : %s — fallback local", err)
+
+    local = Path(__file__).parent / "channels.json"
+    with open(local, encoding="utf-8") as f:
+        data = json.load(f)
+    if not _channels_cache:
+        _channels_cache, _channels_cache_ts = data, now
+    return data
+
+
 def flatten_clubs(clubs: dict) -> dict[str, dict]:
     """{"NBA": {"boston-celtics": {...}}} -> {"boston-celtics": {..., "league": "NBA"}}."""
     flat: dict[str, dict] = {}
@@ -104,6 +138,7 @@ class BasketTvCoordinator(DataUpdateCoordinator):
         session = async_get_clientsession(self.hass)
         clubs = flatten_clubs(await load_clubs_async(session))
         logos = {norm(c["name"]): c.get("logo", "") for c in clubs.values() if c.get("name")}
+        channels = await load_channels_async(session)
         now = dt_util.now()
 
         data: dict = {}
@@ -120,17 +155,18 @@ class BasketTvCoordinator(DataUpdateCoordinator):
                 if self.data and slug in self.data:
                     data[slug] = self.data[slug]
                     continue
-                data[slug] = build_club_data(slug, cfg, "<rss><channel/></rss>", logos, now)
+                data[slug] = build_club_data(slug, cfg, "<rss><channel/></rss>", logos, now, channels)
                 continue
 
             try:
-                data[slug] = build_club_data(slug, cfg, xml_text, logos, now)
+                data[slug] = build_club_data(slug, cfg, xml_text, logos, now, channels)
             except Exception as err:  # noqa: BLE001 — flux mal formé
                 _LOGGER.warning("Flux Basket TV illisible pour %s : %s", slug, err)
                 failures += 1
                 data[slug] = self.data[slug] if self.data and slug in self.data else \
-                    build_club_data(slug, cfg, "<rss><channel/></rss>", logos, now)
+                    build_club_data(slug, cfg, "<rss><channel/></rss>", logos, now, channels)
 
         if self.selected and failures == len(self.selected):
             raise UpdateFailed("Aucun flux Basket TV n'a pu être récupéré")
         return data
+        
