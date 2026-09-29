@@ -1,4 +1,7 @@
 # Basket TV — Intégration HACS pour Home Assistant
+
+![Installations](https://img.shields.io/badge/dynamic/json?color=41BDF5&logo=home-assistant&label=Installations&suffix=%20installs&cacheSeconds=15600&style=for-the-badge&url=https://analytics.home-assistant.io/custom_integrations.json&query=$.basket_tv.total)
+
 [![PayPal](https://img.shields.io/badge/paypal-me-blue.svg?style=for-the-badge&color=purple&logo=paypal&logoColor=ccc&link=https%3A%2F%2Fpaypal.me%2hlaissus/5)](https://paypal.me/hlaissus/5)
 [![GitHub Release]( https://img.shields.io/github/v/release/developpeurbox/footao-game-card?style=for-the-badge)](https://github.com/developpeurbox/footao-game-card/releases)
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg?style=for-the-badge)](https://github.com/hacs/integration)
