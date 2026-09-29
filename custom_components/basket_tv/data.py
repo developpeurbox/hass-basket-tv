@@ -40,8 +40,15 @@ def logo_for(name: str, team_name: str, team_logo: str, logos: dict[str, str]) -
     return ""
 
 
+def channel_logo(name: str, channels: dict[str, str]) -> str:
+    """Logo d'une chaîne à partir de channels.json (nom normalisé -> URL)."""
+    if not name:
+        return ""
+    return channels.get(norm(name), "")
+
+
 def build_club_data(slug: str, cfg: dict, xml_text: str, logos: dict[str, str],
-                    now: datetime) -> dict:
+                    now: datetime, channels: dict[str, str] | None = None) -> dict:
     """Retourne {"state": ..., "attributes": {...}} pour un club."""
     team = cfg.get("name") or slug.replace("-", " ").title()
     team_logo = cfg.get("logo", "")
@@ -57,6 +64,7 @@ def build_club_data(slug: str, cfg: dict, xml_text: str, logos: dict[str, str],
     fin = start + MATCH_DURATION
     situation = "dom" if same_team(m.home, team) else "ext"
     ch = m.channels
+    channels = channels or {}
 
     return {
         "state": ch[0] if ch else "Non renseigné",
@@ -79,12 +87,13 @@ def build_club_data(slug: str, cfg: dict, xml_text: str, logos: dict[str, str],
             "display": fin > now,
             "heure": start.strftime("%H:%M"),
             "diffuseur1": ch[0] if ch else "",
-            "logoDiffuseur1": "",
+            "logoDiffuseur1": channel_logo(ch[0], channels) if ch else "",
             "diffuseur2": ch[1] if len(ch) > 1 else "",
-            "logoDiffuseur2": "",
+            "logoDiffuseur2": channel_logo(ch[1], channels) if len(ch) > 1 else "",
             "chaines": ch,
             "game": f"{m.home} - {m.away}",
             "lien_match": m.link,
             "slug": slug,
+
         },
     }
