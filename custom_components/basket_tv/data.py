@@ -20,6 +20,12 @@ def norm(s: str) -> str:
     return re.sub(r"[^a-z0-9]+", " ", s).strip()
 
 
+# Logo générique utilisé quand le club (championnat non couvert par clubs.json,
+# ex. championnat national d'un club d'Euroligue) n'est pas dans le dataset.
+# Même logo par défaut que hass-footao, pour rester cohérent entre les intégrations.
+LOGO_DEFAULT = "https://r2.thesportsdb.com/images/media/team/badge/rd725i1560082919.png/small"
+
+
 def same_team(a: str, b: str) -> bool:
     na, nb = norm(a), norm(b)
     if not na or not nb:
@@ -28,16 +34,23 @@ def same_team(a: str, b: str) -> bool:
 
 
 def logo_for(name: str, team_name: str, team_logo: str, logos: dict[str, str]) -> str:
-    """Logo d'une équipe : le club suivi, sinon un club connu du dataset, sinon vide."""
+    """Logo d'une équipe : le club suivi, sinon un club connu du dataset, sinon un logo générique.
+
+    Un club d'Euroligue affiche aussi ses matchs de championnat national ; l'adversaire
+    du jour n'est alors pas forcément dans clubs.json (on ne maintient pas la liste de
+    tous les championnats). LOGO_DEFAULT évite un logo vide dans ce cas.
+    """
+    if not name:
+        return LOGO_DEFAULT
     if same_team(name, team_name):
-        return team_logo
+        return team_logo or LOGO_DEFAULT
     n = norm(name)
     if n in logos:
-        return logos[n]
+        return logos[n] or LOGO_DEFAULT
     for key, url in logos.items():
         if same_team(key, n):
-            return url
-    return ""
+            return url or LOGO_DEFAULT
+    return LOGO_DEFAULT
 
 
 def channel_logo(name: str, channels: dict[str, str]) -> str:
@@ -94,6 +107,5 @@ def build_club_data(slug: str, cfg: dict, xml_text: str, logos: dict[str, str],
             "game": f"{m.home} - {m.away}",
             "lien_match": m.link,
             "slug": slug,
-
         },
-    }
+        }
