@@ -1,11 +1,13 @@
 # Basket TV — Intégration HACS pour Home Assistant
-
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=for-the-badge)](https://github.com/developpeurbox/hass-basket-tv/blob/main/LICENSE)
+[![PayPal](https://img.shields.io/badge/paypal-me-blue.svg?style=for-the-badge&color=purple&logo=paypal&logoColor=ccc&link=https%3A%2F%2Fpaypal.me%2hlaissus/5)](https://paypal.me/hlaissus/5)
+[![GitHub Release]( https://img.shields.io/github/v/release/developpeurbox/footao-game-card?style=for-the-badge)](https://github.com/developpeurbox/footao-game-card/releases)
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg?style=for-the-badge)](https://github.com/hacs/integration)
-[![Community Forum](https://img.shields.io/badge/community-forum-brightgreen.svg?style=for-the-badge)](https://forum.hacf.fr/)
+[![Community Forum]( https://img.shields.io/badge/community-forum-brightgreen.svg?style=for-the-badge)](https://community.home-assistant.io)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=for-the-badge)](https://github.com/developpeurbox/footao-game-card/blob/main/LICENSE)
 
-[![HACS Action](https://github.com/developpeurbox/hass-basket-tv/actions/workflows/hacs.yml/badge.svg?style=for-the-badge)](https://github.com/developpeurbox/hass-basket-tv/actions/workflows/hacs.yml)
-[![HACS Action](https://github.com/developpeurbox/hass-basket-tv/actions/workflows/hassfest.yml/badge.svg?style=for-the-badge)](https://github.com/developpeurbox/hass-basket-tv/actions/workflows/hassfest.yml)
+ 
+
+
 
 Intégration personnalisée pour Home Assistant permettant de suivre le **prochain match télévisé** de vos clubs de basket préférés (Betclic Élite, Pro B, Euroligue, NBA, équipes de France), à partir des flux RSS de [**tv-sports.fr**](https://tv-sports.fr/).
 
