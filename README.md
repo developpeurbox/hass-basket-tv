@@ -12,7 +12,7 @@ Intégration personnalisée pour Home Assistant permettant de suivre le **procha
 
 ![Exemple RUgby TV Game Card](/doc/images/example.png "Exemple d'affichage")
 
-> 🎴 La carte Lovelace dédiée n'est **pas incluse** dans ce dépôt — elle vit dans son propre repo : [`ha-basket-tv-game-card`](https://github.com/developpeurbox/ha-basket-tv-game-card), à installer séparément.
+> 🎴 La carte Lovelace dédiée n'est **pas incluse** dans ce dépôt — elle vit dans son propre repo : [`ha-basket-tv-game-card`](https://github.com/developpeurbox/basket-tv-game-card), à installer séparément.
 
 ## ✨ Caractéristiques
 
