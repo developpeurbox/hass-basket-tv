@@ -1,11 +1,11 @@
 """Constantes pour l'intégration Basket TV (Betclic Élite / Pro B / NBA)."""
 
 DOMAIN = "basket_tv"
-SCAN_INTERVAL_HOURS = 6  # le flux RSS annonce lui-même un ttl de 6 h
+SCAN_INTERVAL_HOURS = 12  # le flux RSS annonce lui-même un ttl de 6 h
 
 # Flux RSS par équipe (code numérique + slug), limité aux matchs retransmis
 RSS_URL = "https://tv-sports.fr/rss/equipe/{code}/{slug}?direct=1"
-REQUEST_DELAY = 1.5  # secondes entre deux clubs, pour rester poli avec le site
+REQUEST_DELAY = 2  # secondes entre deux clubs, pour rester poli avec le site
 
 # URL distante du fichier clubs.json (liste des clubs par championnat).
 CLUBS_JSON_URL = (
