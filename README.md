@@ -38,7 +38,7 @@ Intégration personnalisée pour Home Assistant permettant de suivre le **procha
    1. Ouvrez **HACS** dans Home Assistant
    2. Allez dans **Intégrations**
    3. Cliquez sur les **3 points** en haut à droite → **Dépôts personnalisés**
-   4. Ajouter: [https://github.com/developpeurbox/hass-footao.git](https://github.com/developpeurbox/hass-basket-tv)
+   4. Ajouter: [https://github.com/developpeurbox/hass-basket-tv.git](https://github.com/developpeurbox/hass-basket-tv)
    5. Catégorie **Integration**
    6. Cherchez "**Basket TV**" et cliquez sur **Télécharger**
    7. **Redémarrez Home Assistant**
