@@ -66,11 +66,18 @@ def build_club_data(slug: str, cfg: dict, xml_text: str, logos: dict[str, str],
     team = cfg.get("name") or slug.replace("-", " ").title()
     team_logo = cfg.get("logo", "")
     m = next_match(xml_text, now=now)
+    scraped_at = now.strftime("%Y-%m-%d %H:%M:%S")
 
     if m is None:
         return {
             "state": "Aucun match",
-            "attributes": {"team": team, "logoTeam": team_logo, "competition": "", "slug": slug},
+            "attributes": {
+                "team": team,
+                "logoTeam": team_logo,
+                "competition": "",
+                "slug": slug,
+                "scraped_at": scraped_at,
+            },
         }
 
     start = m.start.astimezone(now.tzinfo)
@@ -107,5 +114,6 @@ def build_club_data(slug: str, cfg: dict, xml_text: str, logos: dict[str, str],
             "game": f"{m.home} - {m.away}",
             "lien_match": m.link,
             "slug": slug,
+            "scraped_at": scraped_at,
         },
-        }
+    }

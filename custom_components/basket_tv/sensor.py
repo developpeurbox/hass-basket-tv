@@ -20,7 +20,7 @@ EMPTY_ATTRS = {
     "diffuseur1": "", "logoDiffuseur1": "",
     "diffuseur2": "", "logoDiffuseur2": "",
     "chaines": [],
-    "game": "", "lien_match": "",
+    "game": "", "lien_match": "", "scraped_at": "",
 }
 
 
@@ -67,9 +67,10 @@ class BasketTvSensor(CoordinatorEntity, SensorEntity):
 
     @property
     def device_info(self):
+        # Un appareil par équipe
         return {
-            "identifiers": {(DOMAIN, "baskettv_device")},
-            "name": "Basket TV",
+            "identifiers": {(DOMAIN, f"baskettv_{self._slug}")},
+            "name": f"Basket TV {self._display_name}",
             "model": "Match Sensor",
             "manufacturer": "developpeurbox",
         }
