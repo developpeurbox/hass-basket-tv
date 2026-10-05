@@ -21,7 +21,7 @@ Intégration personnalisée pour Home Assistant permettant de suivre le **procha
 
 - 📅 Suivi multi-clubs : un sensor par club, toutes compétitions confondues (championnat national **et** coupes européennes pour les clubs qui y jouent, ex. ASVEL en Euroligue).
 - 📺 Infos complètes : adversaire, domicile/extérieur, compétition, date, heure, diffuseur(s) TV et leurs logos, logos des équipes.
-- ⚙️ Configuration via l'interface Home Assistant (sélection multi-clubs, **une seule instance** de l'intégration).
+- ⚙️ Configuration via l'interface Home Assistant (une équipe par entrée, ajoutez l'intégration autant de fois que nécessaire).
 - 🔗 Lien direct vers la fiche du match sur tv-sports.fr.
 
 
