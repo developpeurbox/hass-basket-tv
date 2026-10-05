@@ -2,32 +2,22 @@
   "config": {
     "step": {
       "user": {
-        "title": "Basket TV — Clubs",
-        "description": "Sélectionnez les clubs à suivre (Betclic Élite, Pro B, NBA, Euroligue et équipes de France).",
+        "title": "Basket TV — Ligue",
+        "description": "Choisissez la ligue de l'équipe à suivre. Vous choisirez l'équipe à l'étape suivante.",
         "data": {
-          "clubs": "Clubs"
+          "league": "Ligue"
+        }
+      },
+      "club": {
+        "title": "Basket TV — Équipe",
+        "description": "Sélectionnez l'équipe à suivre ({league}). Ajoutez l'intégration une nouvelle fois pour suivre une autre équipe.",
+        "data": {
+          "club": "Équipe"
         }
       }
-    },
-    "error": {
-      "no_club": "Sélectionnez au moins un club."
     },
     "abort": {
-      "already_configured": "Basket TV est déjà configuré. Utilisez le bouton \"Configurer\" sur l'intégration existante pour modifier les clubs suivis."
-    }
-  },
-  "options": {
-    "step": {
-      "init": {
-        "title": "Basket TV — Modifier les clubs",
-        "description": "Choisissez les clubs à suivre (Betclic Élite, Pro B, NBA, Euroligue et équipes de France).",
-        "data": {
-          "clubs": "Clubs"
-        }
-      }
-    },
-    "error": {
-      "no_club": "Sélectionnez au moins un club."
+      "already_configured": "Toutes les équipes disponibles sont déjà configurées."
     }
   }
 }
