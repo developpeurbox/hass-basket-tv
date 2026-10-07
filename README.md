@@ -13,7 +13,10 @@
 [![HACS Action](https://github.com/developpeurbox/hass-basket-tv/actions/workflows/hassfest.yml/badge.svg?style=for-the-badge)](https://github.com/developpeurbox/hass-basket-tv/actions/workflows/hassfest.yml)
 
 Intégration personnalisée pour Home Assistant permettant de suivre le **prochain match télévisé** de vos clubs de basket préférés (Betclic Élite, Pro B, Euroligue, NBA, équipes de France), à partir des flux RSS de [**tv-sports.fr**](https://tv-sports.fr/).
-
+<a class="site-name" href="/" aria-label="TV-Sports.fr, accueil">
+                <img class="site-mark" src="/assets/images/site-mark-a61ba04520fd.webp?v=1786886556" alt="" width="96" height="96" aria-hidden="true">
+                <span class="site-wordmark" aria-hidden="true"><span>TV</span><span class="site-wordmark__accent">-</span><span class="site-wordmark__sports">SPORTS</span><span class="site-wordmark__accent site-wordmark__suffix">.fr</span></span>
+            </a>
 
 > 🎴 La carte Lovelace dédiée n'est **pas incluse** dans ce dépôt — elle vit dans son propre repo : [`ha-basket-tv-game-card`](https://github.com/developpeurbox/basket-tv-game-card), à installer séparément.
 
