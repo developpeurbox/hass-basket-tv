@@ -1,8 +1,8 @@
 blueprint:
   name: Basket TV Notification jour de match
   description: >
-    Envoie une notification si au moins un capteur Basket TV indique
-    un match aujourd'hui.
+    Envoie une notification si au moins un capteur Basket TV a un match
+    dans les prochaines heures (24 h par défaut) à partir de l'heure d'exécution.
   domain: automation
 
   input:
@@ -20,7 +20,7 @@ blueprint:
       name: Service de notification
       description: Choisissez le service de notification à utiliser (ex. notify.mobile_app_...)
       selector:
-        text: 
+        text:
 
     notify_time:
       name: Heure de vérification
@@ -28,9 +28,19 @@ blueprint:
       selector:
         time:
 
+    hours_ahead:
+      name: Fenêtre de recherche (heures)
+      description: Nombre d'heures à regarder à partir de l'heure d'exécution
+      default: 24
+      selector:
+        number:
+          min: 1
+          max: 72
+          mode: box
+
     title_template:
       name: Titre de la notification
-      default: "🏀 Jour de match !"
+      default: "🏀 Match à venir !"
       selector:
         text:
 
@@ -42,28 +52,33 @@ variables:
   input_sensors: !input match_sensors
   notify_svc: !input notification_service
   title_rendered: !input title_template
+  hours_ahead: !input hours_ahead
 
   matches: >
     {% set ns = namespace(result=[]) %}
+    {% set n = now().replace(tzinfo=none) %}
+    {% set limit = n + timedelta(hours=hours_ahead | int(24)) %}
     {% for entity_id in input_sensors %}
-      {% if state_attr(entity_id, 'date') == now().strftime('%d/%m/%Y') %}
-        {% set ns.result = ns.result + [entity_id] %}
+      {% set d = state_attr(entity_id, 'date') %}
+      {% set h = (state_attr(entity_id, 'heure') or '00:00') | string | replace('h', ':') %}
+      {% set h = h ~ '00' if h.endswith(':') else h %}
+      {% if d %}
+        {% set dt = strptime(d ~ ' ' ~ h, '%d/%m/%Y %H:%M', none) %}
+        {% if dt is not none and n <= dt <= limit %}
+          {% set ns.result = ns.result + [{'e': entity_id, 'dt': dt.isoformat()}] %}
+        {% endif %}
       {% endif %}
     {% endfor %}
-    {{ ns.result }}
+    {{ (ns.result | sort(attribute='dt') | map(attribute='e') | list) }}
 
   message_rendered: |
-    {% set ns = namespace(result=[]) %}
-    {% for entity_id in input_sensors %}
-      {% if state_attr(entity_id, 'date') == now().strftime('%d/%m/%Y') %}
-        {% set ns.result = ns.result + [entity_id] %}
-      {% endif %}
-    {% endfor %}
-    {% for s in ns.result %}
+    {% set today = now().strftime('%d/%m/%Y') %}
+    {% for s in matches %}
       {% set d1 = state_attr(s, 'diffuseur1') %}
       {% set d2 = state_attr(s, 'diffuseur2') %}
       {% set chaines = [d1, d2] | select('!=', '') | select('!=', none) | list | join(' / ') %}
-      🏀 {{ state_attr(s, 'game') }} 🕐 {{ state_attr(s, 'heure') }}{% if chaines %} 📺 {{ chaines }}{% endif %}
+      {% set d = state_attr(s, 'date') %}
+      🏀 {{ state_attr(s, 'game') }} 🕐 {% if d != today %}{{ d }} {% endif %}{{ state_attr(s, 'heure') }}{% if chaines %} 📺 {{ chaines }}{% endif %}
     {% endfor %}
 
 condition:
