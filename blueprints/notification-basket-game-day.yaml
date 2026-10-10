@@ -1,4 +1,4 @@
-# Version : 1.1.1
+# Version : 1.1.2
 blueprint:
   name: Basket TV Notification jour de match
   description: >
@@ -72,22 +72,16 @@ variables:
     {% endfor %}
     {{ (ns.result | sort(attribute='dt') | map(attribute='e') | list) }}
 
-  message_rendered: |
+  message_rendered: |-
     {%- set today = now().strftime('%d/%m/%Y') -%}
+    {%- set ns = namespace(out='') -%}
     {%- for s in matches -%}
-    {%- set d1 = state_attr(s, 'diffuseur1') -%}
-    {%- set d2 = state_attr(s, 'diffuseur2') -%}
-    {%- set chaines = [d1, d2] | select('!=', '') | select('!=', none) | list | join(' / ') -%}
+    {%- set chaines = [state_attr(s, 'diffuseur1'), state_attr(s, 'diffuseur2')] | select('!=', '') | select('!=', none) | list | join(' / ') -%}
     {%- set d = state_attr(s, 'date') -%}
-    {%- if not loop.first %}
-
-    {% endif -%}
-    🏀 {{ state_attr(s, 'game') }}
-    🕐 {% if d != today %}{{ d }} {% endif %}{{ state_attr(s, 'heure') }}
-    {%- if chaines %}
-    📺 {{ chaines }}
-    {%- endif %}
-    {%- endfor %}
+    {%- set bloc = '🏀 ' ~ state_attr(s, 'game') ~ '\n🕐 ' ~ ((d ~ ' ') if d != today else '') ~ state_attr(s, 'heure') ~ (('\n📺 ' ~ chaines) if chaines else '') -%}
+    {%- set ns.out = ns.out ~ ('\n\n' if ns.out else '') ~ bloc -%}
+    {%- endfor -%}
+    {{ ns.out }}
 
 condition:
   - condition: template
