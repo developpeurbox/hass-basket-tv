@@ -1,3 +1,4 @@
+# Version : 1.1.1
 blueprint:
   name: Basket TV Notification jour de match
   description: >
@@ -72,14 +73,21 @@ variables:
     {{ (ns.result | sort(attribute='dt') | map(attribute='e') | list) }}
 
   message_rendered: |
-    {% set today = now().strftime('%d/%m/%Y') %}
-    {% for s in matches %}
-      {% set d1 = state_attr(s, 'diffuseur1') %}
-      {% set d2 = state_attr(s, 'diffuseur2') %}
-      {% set chaines = [d1, d2] | select('!=', '') | select('!=', none) | list | join(' / ') %}
-      {% set d = state_attr(s, 'date') %}
-      🏀 {{ state_attr(s, 'game') }} 🕐 {% if d != today %}{{ d }} {% endif %}{{ state_attr(s, 'heure') }}{% if chaines %} 📺 {{ chaines }}{% endif %}
-    {% endfor %}
+    {%- set today = now().strftime('%d/%m/%Y') -%}
+    {%- for s in matches -%}
+    {%- set d1 = state_attr(s, 'diffuseur1') -%}
+    {%- set d2 = state_attr(s, 'diffuseur2') -%}
+    {%- set chaines = [d1, d2] | select('!=', '') | select('!=', none) | list | join(' / ') -%}
+    {%- set d = state_attr(s, 'date') -%}
+    {%- if not loop.first %}
+
+    {% endif -%}
+    🏀 {{ state_attr(s, 'game') }}
+    🕐 {% if d != today %}{{ d }} {% endif %}{{ state_attr(s, 'heure') }}
+    {%- if chaines %}
+    📺 {{ chaines }}
+    {%- endif %}
+    {%- endfor %}
 
 condition:
   - condition: template
