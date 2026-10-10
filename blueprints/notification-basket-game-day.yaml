@@ -1,4 +1,3 @@
-# Version : 1.1.0
 blueprint:
   name: Basket TV Notification jour de match
   description: >
@@ -61,7 +60,8 @@ variables:
     {% set limit = n + timedelta(hours=hours_ahead | int(24)) %}
     {% for entity_id in input_sensors %}
       {% set d = state_attr(entity_id, 'date') %}
-      {% set h = state_attr(entity_id, 'heure') or '00:00' %}
+      {% set h = (state_attr(entity_id, 'heure') or '00:00') | string | replace('h', ':') %}
+      {% set h = h ~ '00' if h.endswith(':') else h %}
       {% if d %}
         {% set dt = strptime(d ~ ' ' ~ h, '%d/%m/%Y %H:%M', none) %}
         {% if dt is not none and n <= dt <= limit %}
@@ -71,24 +71,15 @@ variables:
     {% endfor %}
     {{ (ns.result | sort(attribute='dt') | map(attribute='e') | list) }}
 
-  message_rendered: |-
+  message_rendered: |
     {% set today = now().strftime('%d/%m/%Y') %}
-    {% set ns = namespace(blocs=[]) %}
     {% for s in matches %}
       {% set d1 = state_attr(s, 'diffuseur1') %}
       {% set d2 = state_attr(s, 'diffuseur2') %}
       {% set chaines = [d1, d2] | select('!=', '') | select('!=', none) | list | join(' / ') %}
       {% set d = state_attr(s, 'date') %}
-      {% set lignes = [
-        '🏀 ' ~ state_attr(s, 'game'),
-        '🕐 ' ~ ((d ~ ' ') if d != today else '') ~ state_attr(s, 'heure')
-      ] %}
-      {% if chaines %}
-        {% set lignes = lignes + ['📺 ' ~ chaines] %}
-      {% endif %}
-      {% set ns.blocs = ns.blocs + [lignes | join('\n')] %}
+      🏀 {{ state_attr(s, 'game') }} 🕐 {% if d != today %}{{ d }} {% endif %}{{ state_attr(s, 'heure') }}{% if chaines %} 📺 {{ chaines }}{% endif %}
     {% endfor %}
-    {{ ns.blocs | join('\n\n') }}
 
 condition:
   - condition: template
