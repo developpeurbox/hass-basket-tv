@@ -71,15 +71,24 @@ variables:
     {% endfor %}
     {{ (ns.result | sort(attribute='dt') | map(attribute='e') | list) }}
 
-  message_rendered: |
+    message_rendered: |-
     {% set today = now().strftime('%d/%m/%Y') %}
+    {% set ns = namespace(blocs=[]) %}
     {% for s in matches %}
       {% set d1 = state_attr(s, 'diffuseur1') %}
       {% set d2 = state_attr(s, 'diffuseur2') %}
       {% set chaines = [d1, d2] | select('!=', '') | select('!=', none) | list | join(' / ') %}
       {% set d = state_attr(s, 'date') %}
-      🏀 {{ state_attr(s, 'game') }} 🕐 {% if d != today %}{{ d }} {% endif %}{{ state_attr(s, 'heure') }}{% if chaines %} 📺 {{ chaines }}{% endif %}
+      {% set lignes = [
+        '🏀 ' ~ state_attr(s, 'game'),
+        '🕐 ' ~ ((d ~ ' ') if d != today else '') ~ state_attr(s, 'heure')
+      ] %}
+      {% if chaines %}
+        {% set lignes = lignes + ['📺 ' ~ chaines] %}
+      {% endif %}
+      {% set ns.blocs = ns.blocs + [lignes | join('\n')] %}
     {% endfor %}
+    {{ ns.blocs | join('\n\n') }}
 
 condition:
   - condition: template
