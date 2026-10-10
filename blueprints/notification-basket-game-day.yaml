@@ -61,8 +61,7 @@ variables:
     {% set limit = n + timedelta(hours=hours_ahead | int(24)) %}
     {% for entity_id in input_sensors %}
       {% set d = state_attr(entity_id, 'date') %}
-      {% set h = (state_attr(entity_id, 'heure') or '00:00') | string | replace('h', ':') %}
-      {% set h = h ~ '00' if h.endswith(':') else h %}
+      {% set h = state_attr(entity_id, 'heure') or '00:00' %}
       {% if d %}
         {% set dt = strptime(d ~ ' ' ~ h, '%d/%m/%Y %H:%M', none) %}
         {% if dt is not none and n <= dt <= limit %}
@@ -72,7 +71,7 @@ variables:
     {% endfor %}
     {{ (ns.result | sort(attribute='dt') | map(attribute='e') | list) }}
 
-    message_rendered: |-
+  message_rendered: |-
     {% set today = now().strftime('%d/%m/%Y') %}
     {% set ns = namespace(blocs=[]) %}
     {% for s in matches %}
