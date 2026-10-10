@@ -90,7 +90,7 @@ condition:
 action:
   - action: "{{ notify_svc }}"
     data:
-      title: "{{ title_rendered }}"
+      title: "{{ title_rendered }} (v1.1.2)"
       message: "{{ message_rendered }}"
 
 mode: single
