@@ -3,7 +3,7 @@
   "name": "Basket TV (Betclic Élite / Pro B / NBA)",
   "codeowners": ["@developpeurbox"],
   "config_flow": true,
-  "dependencies": ["http", "frontend"]
+  "dependencies": ["http", "frontend"],
   "documentation": "https://github.com/developpeurbox/hass-basket-tv",
   "iot_class": "cloud_polling",
   "issue_tracker": "https://github.com/developpeurbox/hass-basket-tv/issues",
