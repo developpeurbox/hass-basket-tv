@@ -3,9 +3,15 @@ from __future__ import annotations
 
 import logging
 
+from pathlib import Path
+
+from homeassistant.components.frontend import add_extra_js_url
+from homeassistant.components.http import StaticPathConfig
 from homeassistant.config_entries import SOURCE_IMPORT, ConfigEntry
 from homeassistant.core import HomeAssistant
+from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers import entity_registry as er
+from homeassistant.loader import async_get_integration
 
 from .const import DOMAIN
 from .coordinator import BasketTvCoordinator
@@ -13,6 +19,22 @@ from .coordinator import BasketTvCoordinator
 _LOGGER = logging.getLogger(__name__)
 
 PLATFORMS = ["sensor"]
+
+CONFIG_SCHEMA = cv.config_entry_only_config_schema(DOMAIN)
+
+CARD_FILE = "basket-tv-game-card.js"
+CARD_URL = f"/{DOMAIN}_static/{CARD_FILE}"
+
+
+async def async_setup(hass: HomeAssistant, config: dict) -> bool:
+    """Expose la carte Lovelace embarquée et la charge dans le frontend."""
+    www = Path(__file__).parent / "www" / CARD_FILE
+    await hass.http.async_register_static_paths(
+        [StaticPathConfig(CARD_URL, str(www), cache_headers=False)]
+    )
+    integration = await async_get_integration(hass, DOMAIN)
+    add_extra_js_url(hass, f"{CARD_URL}?v={integration.version}")
+    return True
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
