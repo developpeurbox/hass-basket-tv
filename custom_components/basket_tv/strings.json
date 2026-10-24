@@ -2,48 +2,22 @@
   "config": {
     "step": {
       "user": {
-        "title": "Basket TV — Ligues",
-        "description": "Choisissez la ou les ligues à suivre. Vous choisirez les clubs à l'étape suivante.",
+        "title": "Basket TV — League",
+        "description": "Choose the league of the team to follow. You will choose the team in the next step.",
         "data": {
-          "leagues": "Ligues"
+          "league": "League"
         }
       },
-      "clubs": {
-        "title": "Basket TV — Clubs",
-        "description": "Sélectionnez les clubs à suivre parmi les ligues choisies.",
+      "club": {
+        "title": "Basket TV — Team",
+        "description": "Select the team to follow ({league}). Add the integration again to follow another team.",
         "data": {
-          "clubs": "Clubs"
+          "club": "Team"
         }
       }
-    },
-    "error": {
-      "no_league": "Sélectionnez au moins une ligue.",
-      "no_club": "Sélectionnez au moins un club."
     },
     "abort": {
-      "already_configured": "Basket TV est déjà configuré. Utilisez le bouton \"Configurer\" sur l'intégration existante pour modifier les clubs suivis."
-    }
-  },
-  "options": {
-    "step": {
-      "init": {
-        "title": "Basket TV — Modifier les clubs",
-        "description": "Choisissez la ou les ligues à modifier. Les clubs suivis dans les autres ligues sont conservés sans y toucher.",
-        "data": {
-          "leagues": "Ligues"
-        }
-      },
-      "clubs": {
-        "title": "Basket TV — Clubs",
-        "description": "Cochez les clubs à suivre pour les ligues choisies.",
-        "data": {
-          "clubs": "Clubs"
-        }
-      }
-    },
-    "error": {
-      "no_league": "Sélectionnez au moins une ligue.",
-      "no_club": "Sélectionnez au moins un club."
+      "already_configured": "All available teams are already configured."
     }
   }
 }

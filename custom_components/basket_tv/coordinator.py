@@ -35,12 +35,20 @@ _LOGGER = logging.getLogger(__name__)
 
 HEADERS = {"User-Agent": "hass-basket-tv (Home Assistant custom integration)"}
 
+
+def _read_json(path: Path) -> dict:
+    """Lecture synchrone d'un fichier JSON (à appeler dans l'executor)."""
+    with open(path, encoding="utf-8") as f:
+        return json.load(f)
+
 # ─── Cache clubs.json ────────────────────────────────────────────────────────
 _clubs_cache: dict | None = None
 _clubs_cache_ts: float = 0.0
 
 
-async def load_clubs_async(session: aiohttp.ClientSession, force: bool = False) -> dict:
+async def load_clubs_async(
+    hass: HomeAssistant, session: aiohttp.ClientSession, force: bool = False
+) -> dict:
     """Charge clubs.json : version GitHub (cache 1 h), sinon fichier embarqué."""
     global _clubs_cache, _clubs_cache_ts
 
@@ -61,8 +69,7 @@ async def load_clubs_async(session: aiohttp.ClientSession, force: bool = False) 
         _LOGGER.debug("clubs.json GitHub inaccessible : %s — fallback local", err)
 
     local = Path(__file__).parent / "clubs.json"
-    with open(local, encoding="utf-8") as f:
-        data = json.load(f)
+    data = await hass.async_add_executor_job(_read_json, local)
     if not _clubs_cache:
         _clubs_cache, _clubs_cache_ts = data, now
     return data
@@ -73,7 +80,9 @@ _channels_cache: dict | None = None
 _channels_cache_ts: float = 0.0
 
 
-async def load_channels_async(session: aiohttp.ClientSession, force: bool = False) -> dict:
+async def load_channels_async(
+    hass: HomeAssistant, session: aiohttp.ClientSession, force: bool = False
+) -> dict:
     """Charge channels.json (logo des chaînes) : version GitHub (cache 1 h), sinon fichier embarqué."""
     global _channels_cache, _channels_cache_ts
 
@@ -94,8 +103,7 @@ async def load_channels_async(session: aiohttp.ClientSession, force: bool = Fals
         _LOGGER.debug("channels.json GitHub inaccessible : %s — fallback local", err)
 
     local = Path(__file__).parent / "channels.json"
-    with open(local, encoding="utf-8") as f:
-        data = json.load(f)
+    data = await hass.async_add_executor_job(_read_json, local)
     if not _channels_cache:
         _channels_cache, _channels_cache_ts = data, now
     return data
@@ -136,9 +144,9 @@ class BasketTvCoordinator(DataUpdateCoordinator):
 
     async def _async_update_data(self) -> dict:
         session = async_get_clientsession(self.hass)
-        clubs = flatten_clubs(await load_clubs_async(session))
+        clubs = flatten_clubs(await load_clubs_async(self.hass, session))
         logos = {norm(c["name"]): c.get("logo", "") for c in clubs.values() if c.get("name")}
-        channels = await load_channels_async(session)
+        channels = await load_channels_async(self.hass, session)
         now = dt_util.now()
 
         data: dict = {}
