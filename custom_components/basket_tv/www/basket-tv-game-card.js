@@ -4,7 +4,7 @@
    (Betclic Élite / Pro B / NBA — https://github.com/developpeurbox/hass-basket-tv)
    ======================================================== */
 
-const BASKET_TV_GAME_CARD_VERSION = "v0.0.6";
+const BASKET_TV_GAME_CARD_VERSION = "v0.0.8";
 
 /* Échappement HTML de toute valeur issue d'une entité ou de la config. */
 const esc = (v) =>
@@ -321,7 +321,17 @@ class BasketTvGameCard extends HTMLElement {
   getCardSize() { return 3; }
 }
 
-customElements.define("basket-tv-game-card", BasketTvGameCard);
+if (!customElements.get("basket-tv-game-card")) {
+  customElements.define("basket-tv-game-card", BasketTvGameCard);
+}
+
+/* Déclare la carte dans le sélecteur de cartes de Lovelace. */
+window.customCards = window.customCards || [];
+window.customCards.push({
+  type: "basket-tv-game-card",
+  name: "Basket TV Game Card",
+  description: "Prochain match d'une équipe de basket (intégration basket_tv).",
+});
 
 /* ========================================================
    ÉDITEUR GRAPHIQUE
@@ -450,4 +460,6 @@ class BasketTvGameCardEditor extends HTMLElement {
   }
 }
 
-customElements.define("basket-tv-game-card-editor", BasketTvGameCardEditor);
+if (!customElements.get("basket-tv-game-card-editor")) {
+  customElements.define("basket-tv-game-card-editor", BasketTvGameCardEditor);
+}
