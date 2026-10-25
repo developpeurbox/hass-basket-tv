@@ -33,8 +33,42 @@ async def async_setup(hass: HomeAssistant, config: dict) -> bool:
         [StaticPathConfig(CARD_URL, str(www), cache_headers=False)]
     )
     integration = await async_get_integration(hass, DOMAIN)
-    add_extra_js_url(hass, f"{CARD_URL}?v={integration.version}")
+    await _async_register_card(hass, f"{CARD_URL}?v={integration.version}")
     return True
+
+
+async def _async_register_card(hass: HomeAssistant, url: str) -> None:
+    """Enregistre la carte comme ressource de tableau de bord (module JS).
+
+    En mode « storage », la ressource est créée ou mise à jour dans la liste
+    des ressources Lovelace. En mode YAML (liste non modifiable), on retombe
+    sur le chargement par le frontend.
+    """
+    try:
+        lovelace = hass.data.get("lovelace")
+        resources = getattr(lovelace, "resources", None)
+        if resources is None and isinstance(lovelace, dict):
+            resources = lovelace.get("resources")
+
+        if resources is None or not hasattr(resources, "async_create_item"):
+            add_extra_js_url(hass, url)
+            return
+
+        if not getattr(resources, "loaded", True):
+            await resources.async_load()
+
+        for item in resources.async_items():
+            if item["url"].split("?")[0] == CARD_URL:
+                if item["url"] != url:
+                    await resources.async_update_item(
+                        item["id"], {"res_type": "module", "url": url}
+                    )
+                return
+
+        await resources.async_create_item({"res_type": "module", "url": url})
+    except Exception:  # noqa: BLE001
+        _LOGGER.exception("basket_tv : enregistrement de la carte impossible")
+        add_extra_js_url(hass, url)
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
