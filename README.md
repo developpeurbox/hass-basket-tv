@@ -127,7 +127,7 @@ logger:
 *Toutes les données de match et de diffusion proviennent de [tv-sports.fr](https://tv-sports.fr/). Merci de garder un usage personnel et un intervalle de rafraîchissement raisonnable.*
 
 ## 💬 **Communauté & Support**
-🗣️ **Forum Home Assistant** : [Discuter ici](https://forum.hacf.fr/t/carte-lovelace-integration-basket-tv-le-programme-tv-arrive-dans-home-assistant/84193)
+🗣️ **Forum Home Assistant** : [Discuter ici](https://forum.hacf.fr/t/carte-lovelace-integration-basket-tv-le-programme-tv/85107)
 
 ## 🔧 Attributs disponibles par sensor
 
