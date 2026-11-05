@@ -5,7 +5,7 @@
 # Basket TV — Intégration HACS pour Home Assistant
 [![PayPal](https://img.shields.io/badge/paypal-me-blue.svg?style=for-the-badge&color=purple&logo=paypal&logoColor=ccc&link=https%3A%2F%2Fpaypal.me%2Fhlaissus%2F5)](https://paypal.me/hlaissus/5)
 [![GitHub Release](https://img.shields.io/github/v/release/developpeurbox/hass-basket-tv?style=for-the-badge&color=blue)](https://github.com/developpeurbox/hass-basket-tv/releases)
-[![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg?style=for-the-badge&color=blue)](https://github.com/hacs/integration)
+[![hacs_badge](https://img.shields.io/badge/HACS-Default-41BDF5.svg?style=for-the-badge&color=blue)](https://github.com/hacs/integration)
 [![Community Forum](https://img.shields.io/badge/community-forum-brightgreen.svg?style=for-the-badge&color=pink)](https://forum.hacf.fr/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=for-the-badge)](https://github.com/developpeurbox/hass-basket-tv/blob/main/LICENSE)
 
@@ -36,19 +36,30 @@ Intégration personnalisée pour Home Assistant permettant de suivre le **procha
 
 > [!TIP]
 > ### Installation Rapide via HACS
-> Cliquez sur le bouton ci-dessous pour ajouter automatiquement le dépôt dans HACS :
+> Cliquez sur le bouton ci-dessous pour ouvrir directement la fiche de l'intégration dans HACS :
 >
 > [![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=developpeurbox&repository=hass-basket-tv&category=integration)
 
 ### 🏗️ Méthode 1 : HACS (Recommandée)
 
-   1. Ouvrez **HACS** dans Home Assistant
-   2. Allez dans **Intégrations**
-   3. Cliquez sur les **3 points** en haut à droite → **Dépôts personnalisés**
-   4. Ajoutez : [https://github.com/developpeurbox/hass-basket-tv](https://github.com/developpeurbox/hass-basket-tv)
-   5. Catégorie **Integration**
-   6. Cherchez "**Basket TV**" et cliquez sur **Télécharger**
-   7. **Redémarrez Home Assistant**
+L'intégration est disponible directement dans le catalogue HACS, aucun dépôt personnalisé n'est nécessaire.
+
+> [!NOTE]
+> Avant la version **2026.11.0** de Home Assistant Core, cette section s'appelait **HACS**. Elle s'appelle désormais **Marketplace**.
+
+   1. Ouvrez **HACS** dans Home Assistant (**Marketplace** à partir de Home Assistant Core 2026.11.0)
+   2. Cherchez "**Basket TV**"
+   3. Cliquez sur **Télécharger**
+   4. **Redémarrez Home Assistant**
+
+#### Installée avant le 05/11/2026 via un dépôt personnalisé ?
+
+Si l'intégration a été installée avant le **05/11/2026** en ajoutant `https://github.com/developpeurbox/hass-basket-tv` comme dépôt personnalisé, ce dépôt personnalisé peut maintenant être supprimé :
+
+   1. Dans **HACS** (ou **Marketplace**), ouvrez le menu **3 points** en haut à droite → **Dépôts personnalisés**
+   2. Supprimez `developpeurbox/hass-basket-tv` de la liste
+
+L'intégration reste installée et continue de fonctionner, et les mises à jour arrivent désormais depuis le catalogue par défaut.
 
 ### 🏗️ Méthode 2 : Manuelle
    1. Téléchargez le dossier `custom_components/basket_tv/` de ce dépôt.
