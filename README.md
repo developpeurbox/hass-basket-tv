@@ -2,7 +2,7 @@
   <img src="/doc/images/example.png" alt="Exemple d'affichage" width="400"/>
 </p>
 
-# Basket TV — Intégration HACS pour Home Assistant
+# Basket TV — Intégration HACS pour Home Assistant.
 [![PayPal](https://img.shields.io/badge/paypal-me-blue.svg?style=for-the-badge&color=purple&logo=paypal&logoColor=ccc&link=https%3A%2F%2Fpaypal.me%2Fhlaissus%2F5)](https://paypal.me/hlaissus/5)
 [![GitHub Release](https://img.shields.io/github/v/release/developpeurbox/hass-basket-tv?style=for-the-badge&color=blue)](https://github.com/developpeurbox/hass-basket-tv/releases)
 [![hacs_badge](https://img.shields.io/badge/HACS-Default-41BDF5.svg?style=for-the-badge&color=blue)](https://github.com/hacs/integration)
